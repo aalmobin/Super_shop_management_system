@@ -15,8 +15,8 @@ Basic functionality of a super shop management system
    * `SECRET_KEY = django-insecure-g^43cl^05x03*!#jgk1j7r2)^c$sx0uaay^(%=5djn!=5!-5$l`
 7. Migrate the database by typing `python manage.py makemigrations` and then `python manage.py migrate` on the terminal.
 8. Create admin user if you want by typing `python manage.py createsuperuser` and give the required credentials on the terminal.
-9. Please log in to the admin panel and create Category and Products as you like by the following link
-   * `127.0.0.1:8000/admin`
-10. Now, Run the project from your **localhost** by typing `python manage.py runserver`
-11. Navigate to the URL [127.0.0.1:8000](127.0.0.1:8000) or [localhost:8000](localhost:8000) from your browser.
+9. Now, Run the project from your **localhost** by typing `python manage.py runserver`
+10. Navigate to the URL [127.0.0.1:8000](127.0.0.1:8000) or [localhost:8000](localhost:8000) from your browser.
+11. Please log in to the admin panel and create Category and Products as you like by the following link
+    * `127.0.0.1:8000/admin`    
 12. You can terminate the server anytime by **CTRL+c**.
