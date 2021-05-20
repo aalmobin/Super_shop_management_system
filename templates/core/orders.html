@@ -1,0 +1,49 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'css/mycart.css' %}">{% endblock %}
+
+{% block title %}Order List{% endblock %}
+
+{% block content %}
+
+<h1 class="alert alert-info text-center" role="alert">The Orders</h1>
+<div class="container">
+   <div class="row">
+       <div class="col-md-8 offset-md-2 text-center">
+           {% if orders %}
+           <h4>Ordes</h4>
+           <table class="table">
+               <thead>
+                <tr>
+                    <th class="text-center">SN</th>
+                    <th class="text-center">Customer Name</th>
+                    <th class="text-center">Ordered Date</th>
+                    <th class="text-center">Total</th>
+                    <th class="text-center">INVOICE</th>
+                </tr>
+               </thead>
+               <tbody>
+                {% for order in orders %}
+                   <tr>
+                        <td class="text-center">{{ forloop.counter }}</td>
+                        <td class="text-center">{{ order.customer_name }}</td>
+                        <td class="text-center">{{ order.created_at }}</td>
+                        <td class="text-center">{{ order.total }}</td>
+                        <td class="text-center">
+                            <a target="_blank" href="{% url 'core:invoice' order.pk %}" class="btn btn-sm btn-primary">Download</a>
+                        </td>
+                   </tr>
+                {% endfor %}
+               </tbody>
+           </table>
+           {% else %}
+           <h4>No orders</h4>
+           {% endif %}
+       </div>
+   </div>
+</div>
+
+{% endblock %}
+
+{% block script %}{% endblock %}

@@ -1,0 +1,20 @@
+.product-box{
+    border: 1px solid black;
+    border-radius: 6px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin: 2px;
+    background-color: blanchedalmond;
+}
+img{
+    height: 100px;
+    width: 100px;
+    border: 1px solid black;
+    border-radius: 1px;
+    background: green;
+    padding: 3px;
+}
+
+.p_box{
+
+}

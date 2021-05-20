@@ -1,0 +1,71 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'css/mycart.css' %}">{% endblock %}
+
+{% block title %}cart{% endblock %}
+
+{% block content %}
+
+<h1 class="alert alert-success text-center" role="alert">Your products in the cart</h1>
+<div class="container">
+   <div class="row">
+       <div class="col-md-8 offset-md-2 text-center">
+           {% if cart.cartproduct_set.all %}
+           <h4>Items in the cart</h4>
+           {% if messages %}
+               {% for mess in messages %}
+                   <p class="alert alert-{{ mess.tags }}" role="alert">
+                        {{ mess }}
+                   </p>
+               {% endfor %}
+           {% endif %}
+           <table class="table">
+               <thead>
+                <tr>
+                    <th class="text-center">SN</th>
+                    <th class="text-center">Product</th>
+                    <th class="text-center">Rate</th>
+                    <th class="text-center">Quantity</th>
+                    <th class="text-center">Subtotal</th>
+                    <th class="text-center">Action</th>
+                </tr>
+               </thead>
+               <tbody>
+                {% for cp in cart.cartproduct_set.all %}
+                   <tr>
+                        <td class="text-center">{{ forloop.counter }}</td>
+                        <td class="text-center">{{ cp.product.title }}</td>
+                        <td class="text-center">{{ cp.rate }}</td>
+                        <td class="text-center">{{ cp.quantity }}</td>
+                        <td class="text-center">{{ cp.subtotal }}</td>
+                        <td class="text-center">
+                            <a href="{% url 'core:manage-cart' cp.id %}?action=inc" class="btn btn-sm btn-primary">+</a>
+                            <a href="{% url 'core:manage-cart' cp.id %}?action=dec" class="btn btn-sm btn-secondary">-</a>
+                            <a href="{% url 'core:manage-cart' cp.id %}?action=rmv" class="btn btn-sm btn-danger">x</a>
+                        </td>
+                   </tr>
+                {% endfor %}
+                    <tr>
+                        <th class="text-center" colspan="4">total</th>
+                        <th class="text-center">{{ cart.total }}</th>
+                        {% if cart.cartproduct_set.all %}
+                        <th class="text-center"><a href="{% url 'core:empty-cart' %}" class="btn btn-sm btn-outline-primary">Empty Cart</a></th>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <th colspan="4"></th>
+                        <th class="text-center"><a href="{% url 'core:check-out' %}" class="btn btn-sm btn-outline-secondary">Checkout</a></th>
+                    </tr>
+               </tbody>
+           </table>
+           {% else %}
+           <h4>No items in the cart</h4>
+           {% endif %}
+       </div>
+   </div>
+</div>
+
+{% endblock %}
+
+{% block script %}{% endblock %}

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Invoie</title>
+    <style type="text/css">
+        table, th, td {
+              border: 1px solid black;
+              border-collapse: collapse;
+        }
+        th, td {
+            padding: 5px;
+        }
+        td {
+            text-align: center;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <img src="{{ order_obj.qr_image.path }}" width="200">
+    </div>
+            <table style="width:100%">
+               <thead>
+                <tr>
+                    <th class="text-center">SN</th>
+                    <th class="text-center">Item</th>
+                    <th class="text-center">Unit Price</th>
+                    <th class="text-center">Quantity</th>
+                    <th class="text-center">Total</th>
+                </tr>
+               </thead>
+               <tbody>
+                {% for cp in order_obj.cart.cartproduct_set.all %}
+                   <tr>
+                        <td class="text-center">{{ forloop.counter }}</td>
+                        <td class="text-center">{{ cp.product.title }}</td>
+                        <td class="text-center">{{ cp.rate }}</td>
+                        <td class="text-center">{{ cp.quantity }}</td>
+                        <td class="text-center">{{ cp.subtotal }}</td>
+                   </tr>
+                {% endfor %}
+                    <tr>
+                        <th class="text-center" colspan="4">total in Words {{ total_in_words }} taka only</th>
+                        <th class="text-center">{{ order_obj.total }}</th>
+                    </tr>
+               </tbody>
+           </table>
+  </body>
+</html>

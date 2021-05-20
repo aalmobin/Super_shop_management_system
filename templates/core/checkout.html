@@ -1,0 +1,61 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'css/mycart.css' %}">{% endblock %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+
+<h1 class="alert alert-success text-center" role="alert">Checkout page</h1>
+<div class="container">
+    <div class="row text-center">
+        <div class="col-md-7">
+            <h3>Items in Your Cart</h3>
+            <table class="table">
+               <thead>
+                <tr>
+                    <th class="text-center">SN</th>
+                    <th class="text-center">Product</th>
+                    <th class="text-center">Rate</th>
+                    <th class="text-center">Quantity</th>
+                    <th class="text-center">Subtotal</th>
+                </tr>
+               </thead>
+               <tbody>
+                {% for cp in cart.cartproduct_set.all %}
+                   <tr>
+                        <td class="text-center">{{ forloop.counter }}</td>
+                        <td class="text-center">{{ cp.product.title }}</td>
+                        <td class="text-center">{{ cp.rate }}</td>
+                        <td class="text-center">{{ cp.quantity }}</td>
+                        <td class="text-center">{{ cp.subtotal }}</td>
+                   </tr>
+                {% endfor %}
+                    <tr>
+                        <th class="text-center" colspan="4">total</th>
+                        <th class="text-center">{{ cart.total }}</th>
+                    </tr>
+                    <tr>
+                        <th colspan="4"></th>
+                        <th class="text-center"><a href="{% url 'core:my-cart' %}" class="btn btn-sm btn-outline-secondary">Update Cart</a></th>
+                    </tr>
+               </tbody>
+           </table>
+        </div>
+        <div class="col-md-5">
+            <h3>Your Checkout Form</h3>
+            <form method="POST">
+                {% csrf_token %}
+                <input type="text" class="form-control" name="customer_name" maxlength="200" required="" id="id_customer_name" placeholder="Customer Name"> <br>
+                <input type="email" class="form-control" name="email" maxlength="200" required="" id="id_email" placeholder="Email"> <br>
+                <input type="text" class="form-control" name="phone" maxlength="200" required="" id="id_phone" placeholder="Phone"> <br>
+                <input type="submit" class="btn btn-sm btn-info" value="Submit Order">
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script %}{% endblock %}

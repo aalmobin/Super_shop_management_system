@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">{% endblock %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if messages %}
+   {% for mess in messages %}
+       <p class="alert alert-{{ mess.tags }} text-center" role="alert">
+            {{ mess }}
+       </p>
+   {% endfor %}
+{% endif %}
+<div class="row p_box container">
+    {% for p in products %}
+        <div class="col-md-2 product-box container">
+            <img src="{{ p.p_image.url }}">
+            <h4>{{ p.title }}</h4>
+            {% if p.in_stock == 0 %}
+                <p>Availability: Out of stock <br> Price: {{ p.price }}&nbsp; <a href="{% url 'core:add-to-cart' p.id %}" class="btn btn-sm btn-primary disabled">Add to cart</a></p>
+            {% else %}
+                <p>Availability: {{ p.in_stock }} <br> Price: {{ p.price }}&nbsp; <a href="{% url 'core:add-to-cart' p.id %}" class="btn btn-sm btn-primary">Add to cart</a></p>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block script %}{% endblock %}
